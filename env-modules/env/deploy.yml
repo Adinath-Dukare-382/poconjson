@@ -1,0 +1,18 @@
+trigger: none
+
+pool: samplePool
+
+variables:
+- name: env
+  value: pocjson
+
+stages:
+  - template: templates/terraform-deploy.yml
+    parameters:
+      environment: ${{ variables.env }}
+      working_dir: "$(Build.SourcesDirectory)/POCJson/env"
+      serviceconn_name : "svc-poc2"
+      tfresourcegroupname : "config-demo2"
+      tfstorageaccountname : "globalstorageac"
+      azureRmContainerName : "globalstoragecon2"
+      tfstatefile : "terraform-tfstate.tfstate"
