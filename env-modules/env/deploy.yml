@@ -6,7 +6,20 @@ variables:
 - name: env
   value: pocjson
 
+
+
 stages:
+  - stage: Define Variable
+    jobs:
+      - job:
+        steps:
+          - task: AzureCLI@2
+            inputs:
+              azureSubscription: 'svc-poc2'
+              scriptType: 'ps'
+              scriptLocation: 'inlineScript'
+              inlineScript: 'az group list --query "[?location==''eastus'']" --output table'
+
   - template: ../templates/terraform-deploy.yml
     parameters:
       environment: ${{ variables.env }}
