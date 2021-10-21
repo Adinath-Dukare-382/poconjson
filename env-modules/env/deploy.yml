@@ -18,7 +18,7 @@ stages:
               azureSubscription: 'Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)'
               scriptType: 'ps'
               scriptLocation: 'inlineScript'
-              inlineScript: 'az group list --query "[?location==''''eastus'''']" --output table'
+              inlineScript: 'az group list --query "[?location==''eastus'']" --output table'
               
           # - task: AzureCLI@2
           #   inputs:
