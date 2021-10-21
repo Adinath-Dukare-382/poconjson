@@ -9,7 +9,7 @@ variables:
 
 
 stages:
-  - stage: Define Variable
+  - stage: azurescript
     jobs:
       - job:
         steps:
