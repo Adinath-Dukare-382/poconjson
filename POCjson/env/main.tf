@@ -18,7 +18,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "poconjson"
   location = "eastus"
-  tags = {"env"" = "business"}
+  tags = {
+  env = "business"
+  }
 }
 
 resource "azurerm_app_service_plan" "example" {
