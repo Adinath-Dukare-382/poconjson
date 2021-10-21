@@ -16,7 +16,7 @@ provider "azurerm" {
   features {}
 }
 resource "azurerm_resource_group" "example" {
-  name     = "POCRg"
+  name     = "poconjson"
   location = "eastus"
 }
 
