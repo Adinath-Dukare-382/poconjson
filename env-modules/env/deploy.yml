@@ -1,6 +1,6 @@
 trigger: none
 
-pool: samplePool
+pool: SamplePool
 
 variables:
 - name: env
