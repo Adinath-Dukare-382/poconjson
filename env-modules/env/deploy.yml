@@ -22,6 +22,16 @@ stages:
               inlineScript: 'az group list --query "[?location==''eastus'']" --output table'
                
           - task: AzureCLI@2
+            displayName: Azure CLI
+            inputs:
+              azureSubscription: 'Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)'
+              scriptType: ps
+              scriptLocation: inlineScript
+              inlineScript: |
+                az --version
+                az account show
+
+          - task: AzureCLI@2
             inputs:
               azureSubscription: 'Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)'
               scriptType: 'ps'
@@ -29,10 +39,6 @@ stages:
               inlineScript: |
                 $result=$('az group list --query "[?location==''eastus'']" --output table') 
                 $result
-          - task: PowerShell@2
-            inputs:
-              targetType: 'inline'
-              script: 'Write-Host $result'
 
   # - template: ../templates/terraform-deploy.yml
   #   parameters:
