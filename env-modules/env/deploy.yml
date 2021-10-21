@@ -20,8 +20,8 @@ stages:
               scriptType: 'ps'
               scriptLocation: 'inlineScript'
               inlineScript: |
-                result=$('az group list --query "[?location==''eastus'']" --output table')
-                $result
+                $result=$('az group list --query "[?location==''eastus'']" --output table')
+                Write-Output $result
           - task: AzureCLI@2
             inputs:
               azureSubscription: 'Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)'
