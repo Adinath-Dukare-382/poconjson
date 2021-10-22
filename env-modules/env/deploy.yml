@@ -28,7 +28,7 @@ stages:
               scriptLocation: 'inlineScript'
               inlineScript: |
                 'Get-AzureRmResourceGroup -Tag @{"env" = "business"}'
-               
+          
           # - task: AzureCLI@2
           #   inputs:
           #     azureSubscription: 'Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)'
@@ -41,11 +41,13 @@ stages:
           #   inputs:
           #     script: 'Get-AzureRmResourceGroup -Tag @{"env" = "business"}'
 
-          # - task: AzurePowerShell@5
-          #   inputs:
-          #     azureSubscription: 'Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)'
-          #     ScriptType: 'InlineScript'
-          #     Inline: 'Get-AzureRmResourceGroup -Tag @{''env'' = "business"}'
+          - task: AzurePowerShell@5
+            inputs:
+              azureSubscription: 'Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)'
+              ScriptType: 'InlineScript'
+              Inline: $result = Get-AzureRmResourceGroup -Tag @{''env'' = "business"}
+               $result
+
           # - task: AzurePowerShell@5
           #   inputs:
           #     azureSubscription: 'Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)'
