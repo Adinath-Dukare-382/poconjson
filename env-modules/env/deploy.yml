@@ -39,13 +39,13 @@ stages:
               scriptType: 'ps'
               scriptLocation: 'inlineScript'
               inlineScript: | 
-                $result3 = $(az group list --query "[?tags.env=='business']" | ConvertFrom-Json) | --query '{Name:name}'
+                $result3 = $(az group list --query "[?tags.env=='business']" | ConvertFrom-Json)
                 $rgname1 = $result3.name 
                 write-output $rgname1
-                # $result4 = $(az appservice plan list --query "[?resourceGroup=='$rgname1']" | ConvertFrom-Json)
-                # $planname = $result4.name
-                # write-output $planname
-                # az appservice plan show --name $planname --resource-group $rgname1 --query '{rname:}'
+                $result4 = $(az appservice plan list --query "[?resourceGroup=='$rgname1']" | ConvertFrom-Json)
+                $planname = $result4.name
+                write-output $planname
+                az appservice plan show --name $planname --resource-group $rgname1 --query '{rname:resourcegroup, pname:name}' -o json
               
       
 
