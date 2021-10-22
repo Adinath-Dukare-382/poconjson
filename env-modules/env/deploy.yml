@@ -41,7 +41,7 @@ stages:
             inputs:
               azureSubscription: 'Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)'
               ScriptType: 'InlineScript'
-              Inline: 'Get-AzureRmResourceGroup -Tag @{''env'' = "business"}ts'
+              Inline: 'Get-AzureRmResourceGroup -Tag @{''env'' = "business"}'
               azurePowerShellVersion: 'LatestVersion'
 
           # - task: AzureCLI@2
