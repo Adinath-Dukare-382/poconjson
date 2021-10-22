@@ -41,13 +41,20 @@ stages:
                 $rgname = $result1.resourceGroup
                 write-output $rgname
 
+          # - task: AzureCLI@2
+          #   inputs:
+          #     azureSubscription: 'Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)'
+          #     scriptType: 'ps'
+          #     scriptLocation: 'inlineScript'
+          #     inlineScript: az appservice plan list --resource-group $rgname
+
           - task: AzureCLI@2
             inputs:
               azureSubscription: 'Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)'
               scriptType: 'ps'
               scriptLocation: 'inlineScript'
-              inlineScript: az appservice plan list --resource-group $rgname
-
+              inlineScript: az appservice plan list --query "[?resourceGroup == '$rgname']"
+              
           # - task: AzureCLI@2
           #   inputs:
           #     azureSubscription: 'Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)'
