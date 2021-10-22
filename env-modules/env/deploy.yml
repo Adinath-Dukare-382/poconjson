@@ -27,6 +27,10 @@ stages:
               scriptType: 'ps'
               scriptLocation: 'inlineScript'
               inlineScript: 'Get-AzureRmResourceGroup -Tag @{"env" = "business"}'
+
+          - task: CmdLine@2
+            inputs:
+              script: 'Get-AzureRmResourceGroup -Tag @{''env'' = "business"}'
               
           # - task: AzureCLI@2
           #   displayName: Azure CLI
