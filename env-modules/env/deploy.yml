@@ -70,7 +70,7 @@ stages:
               inlineScript: |
                 $result = az group list --query "[?tags.env=='business']" | ConvertFrom-Json | add-content "C:\Users\A888382\Documents\Testing1\test.txt"
                 $res = $result.name
-                Write-Host $res
+                Write-Output $res
 
           - task: AzureCLI@2
             displayName: Azure CLI
