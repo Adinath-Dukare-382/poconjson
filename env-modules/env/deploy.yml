@@ -78,7 +78,7 @@ stages:
               scriptLocation: 'inlineScript'
               inlineScript: |
                 $result1 = $(az appservice plan list --query "[?tags.env=='prod' && tags.owner=='adinath']" | ConvertFrom-Json)
-                echo $result1
+                $rgname = $result1.resourceGroup
    
 
   # - template: ../templates/terraform-deploy.yml
