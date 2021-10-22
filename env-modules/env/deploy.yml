@@ -19,7 +19,7 @@ stages:
               azureSubscription: 'Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)'
               scriptType: 'ps'
               scriptLocation: 'inlineScript'
-              inlineScript: az group list --query "[?location=='eastus']" --output table --output json
+              inlineScript: az group list --query "[?location=='eastus']" --output table --output json | add-content "C:\Users\A888382\Documents\Testing1\test.txt"
                
           # - task: AzureCLI@2
           #   displayName: Azure CLI
@@ -40,12 +40,12 @@ stages:
           #       $result=$('az group list --query "[?location==''eastus'']" --output table') 
           #       $result
 
-  - template: ../templates/terraform-deploy.yml
-    parameters:
-      environment: ${{ variables.env }}
-      working_dir: "$(Build.SourcesDirectory)/POCJson/env"
-      serviceconn_name : "svc-poc2"
-      tfresourcegroupname : "config-demo2"
-      tfstorageaccountname : "globalstorageac"
-      azureRmContainerName : "globalstoragecon2"
-      tfstatefile : "terraform-tfstate.tfstate"
+  # - template: ../templates/terraform-deploy.yml
+  #   parameters:
+  #     environment: ${{ variables.env }}
+  #     working_dir: "$(Build.SourcesDirectory)/POCJson/env"
+  #     serviceconn_name : "svc-poc2"
+  #     tfresourcegroupname : "config-demo2"
+  #     tfstorageaccountname : "globalstorageac"
+  #     azureRmContainerName : "globalstoragecon2"
+  #     tfstatefile : "terraform-tfstate.tfstate"
