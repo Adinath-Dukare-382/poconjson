@@ -79,7 +79,7 @@ stages:
               inlineScript: |
                 $result1 = $(az appservice plan list --query "[?tags.env=='prod' && tags.owner=='adinath']" | ConvertFrom-Json)
                 $rgname = $result1.resourceGroup
-                echo $rgname
+                # echo $rgname
                 write-output $rgname
    
 
