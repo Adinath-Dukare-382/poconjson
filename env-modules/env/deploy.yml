@@ -19,8 +19,8 @@ stages:
               scriptLocation: 'inlineScript'
               inlineScript: |
                 $result = az group list --query "[?tags.env=='business']" | ConvertFrom-Json | add-content "C:\Users\A888382\Documents\Testing1\test.txt"
-                $res = $result.name
-                Write-Host $res
+                echo $result.name
+             
                 
           # - task: AzureCLI@2
           #   inputs:
@@ -49,15 +49,15 @@ stages:
           #     Inline: $result = Get-AzureRmResourceGroup -Tag @{''env'' = "business"}
           #      $result
 
-          - task: AzurePowerShell@5
-            inputs:
-              azureSubscription: 'Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)'
-              ScriptType: 'InlineScript'
-              azurePowerShellVersion: 'LatestVersion'
-              Inline: |
-                $result = az group list --query "[?tags.env=='business']" | ConvertFrom-Json | add-content "C:\Users\A888382\Documents\Testing1\test.txt"
-                $res = $result.name
-                Write-Host $res
+          # - task: AzurePowerShell@5
+          #   inputs:
+          #     azureSubscription: 'Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)'
+          #     ScriptType: 'InlineScript'
+          #     azurePowerShellVersion: 'LatestVersion'
+          #     Inline: |
+          #       $result = az group list --query "[?tags.env=='business']" | ConvertFrom-Json | add-content "C:\Users\A888382\Documents\Testing1\test.txt"
+          #       $res = $result.name
+          #       Write-Host $res
                 
           # - task: AzurePowerShell@5
           #   inputs:
