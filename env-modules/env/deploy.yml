@@ -45,7 +45,7 @@ stages:
                 $result4 = $(az appservice plan list --query "[?resourceGroup=='$rgname1']" | ConvertFrom-Json)
                 $planname = $result4.name
                 write-output $planname
-                az appservice plan show --name $planname --resource-group $rgname1 --query '{rname:resourcegroup, pname:name}' -o json
+                az appservice plan show --name $planname --resource-group $rgname1 --query '{rname:resourceGroup, pname:name}' -o json
               
       
 
