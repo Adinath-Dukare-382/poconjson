@@ -4,7 +4,7 @@ variables:
 - name: env
   value: pocjson
 
-pool: SamplePool
+# pool: SamplePool
 
 
 stages:
