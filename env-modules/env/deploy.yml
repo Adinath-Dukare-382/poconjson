@@ -1,7 +1,5 @@
 trigger: none
 
-pool: SamplePool
-
 variables:
 - name: env
   value: pocjson
