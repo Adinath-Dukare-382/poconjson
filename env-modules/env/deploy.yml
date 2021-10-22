@@ -29,8 +29,8 @@ stages:
           
           - task: AzurePowerShell@5
             inputs:
-              azureSubscription: 'svc-poc2'
-              # azurePowerShellVersion: 'LatestVersion'
+              azureSubscription: 'svc-poc3'
+              azurePowerShellVersion: 'LatestVersion'
               ScriptType: 'InlineScript'
               Inline: az group list --query "[?tags.env=='business']" --output table
                    
