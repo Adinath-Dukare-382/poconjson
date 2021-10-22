@@ -4,7 +4,7 @@ variables:
 - name: env
   value: pocjson
 - name: res
-  value: ""
+  value: "poconjson"
 
 pool: SamplePool
 
