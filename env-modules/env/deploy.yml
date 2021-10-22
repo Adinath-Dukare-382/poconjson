@@ -33,10 +33,9 @@ stages:
               azureSubscription: 'Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)'
               ScriptType: 'InlineScript'
               Inline: |
-                Install-Module -Name PowerShellGet -MinimumVersion 2.0.1
                 $result = 'Get-AzureRmResourceGroup -Tag @{"env" : "business"}'
                 Write-Host = $result
-              preferredAzurePowerShellVersion: '1.2.0'
+              # preferredAzurePowerShellVersion: '1.2.0'
 
           # - task: AzureCLI@2
           #   inputs:
