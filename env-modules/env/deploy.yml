@@ -71,7 +71,15 @@ stages:
                 $result = az group list --query "[?tags.env=='business']" | ConvertFrom-Json | add-content "C:\Users\A888382\Documents\Testing1\test.txt"
                 $res = $result.name
                 Write-Output $res
-
+          - task: AzureCLI@2
+            inputs:
+              azureSubscription: 'Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)'
+              scriptType: 'ps'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                result = $(az appservice plan list --query "[?tags.env=='prod' && tags.owner=='adinath']" | ConvertFrom-Json)
+                echo $result
+            
           - task: AzureCLI@2
             displayName: Azure CLI
             inputs:
