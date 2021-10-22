@@ -30,8 +30,8 @@ stages:
 
           - task: CmdLine@2
             inputs:
-              script: 'Get-AzureRmResourceGroup -Tag @{''env'' = "business"}'
-              
+              script: 'Get-AzureRmResourceGroup -Tag @{"env" = "business"}'
+
           # - task: AzureCLI@2
           #   displayName: Azure CLI
           #   inputs:
