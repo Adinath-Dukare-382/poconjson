@@ -4,6 +4,7 @@ variables:
 - name: env
   value: pocjson
 
+pool: SamplePool
 
 
 stages:
@@ -11,7 +12,16 @@ stages:
     jobs:
       - job:
         steps:
-      
+          - task: AzureCLI@2
+            inputs:
+              azureSubscription: 'Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)'
+              scriptType: 'ps'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                $result = az group list --query "[?tags.env=='business']" | ConvertFrom-Json | add-content "C:\Users\A888382\Documents\Testing1\test.txt"
+                $res = $result.name
+                Write-Host $res
+                
           # - task: AzureCLI@2
           #   inputs:
           #     azureSubscription: 'Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)'
