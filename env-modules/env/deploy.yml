@@ -21,21 +21,22 @@ stages:
           #     scriptLocation: 'inlineScript'
           #     inlineScript: az group list --query "[?location=='eastus']" --output table --output json | add-content "C:\Users\A888382\Documents\Testing1\test.txt"
               
-          - task: AzureCLI@2
-            inputs:
-              azureSubscription: 'Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)'
-              scriptType: 'ps'
-              scriptLocation: 'inlineScript'
-              inlineScript: |
-                'Get-AzureRmResourceGroup -Tag @{"env" = "business"}'
-          - task: AzurePowerShell@5
-            inputs:
-              azureSubscription: 'Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)'
-              ScriptType: 'InlineScript'
-              Inline: |
-                $result = 'Get-AzureRmResourceGroup -Tag @{"env" : "business"}'
-                  Write-Host = $result
-              preferredAzurePowerShellVersion: '1.1.0'
+          # - task: AzureCLI@2
+          #   inputs:
+          #     azureSubscription: 'Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)'
+          #     scriptType: 'ps'
+          #     scriptLocation: 'inlineScript'
+          #     inlineScript: |
+          #       'Get-AzureRmResourceGroup -Tag @{"env" = "business"}'
+
+          # - task: AzurePowerShell@5
+          #   inputs:
+          #     azureSubscription: 'Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)'
+          #     ScriptType: 'InlineScript'
+          #     Inline: |
+          #       $result = 'Get-AzureRmResourceGroup -Tag @{"env" : "business"}'
+          #         Write-Host = $result
+          #     preferredAzurePowerShellVersion: '1.1.0'
               
           # - task: AzurePowerShell@5
           #   inputs:
@@ -65,12 +66,17 @@ stages:
           #     Inline: $result = Get-AzureRmResourceGroup -Tag @{''env'' = "business"}
           #      $result
 
-          # - task: AzurePowerShell@5
-          #   inputs:
-          #     azureSubscription: 'Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)'
-          #     ScriptType: 'InlineScript'
-          #     Inline: 'Get-AzureRmResourceGroup -Tag @{''env'' = "business"}'
-          #     azurePowerShellVersion: 'LatestVersion'
+          - task: AzurePowerShell@5
+            inputs:
+              azureSubscription: 'Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)'
+              ScriptType: 'InlineScript'
+              azurePowerShellVersion: 'LatestVersion'
+              Inline: |
+                $result = Get-AzureRmResourceGroup -Tag @{"env" = "business"} | Convertfrom-Json
+                $res = $result.ResourceGroupName
+                Write-Host $res
+
+         
 
           # - task: AzureCLI@2
           #   displayName: Azure CLI
