@@ -35,7 +35,7 @@ stages:
               Inline: |
                 $result = 'Get-AzureRmResourceGroup -Tag @{"env" : "business"}'
                 Write-Host = $result
-              preferredAzurePowerShellVersion: '1.1.0'
+              preferredAzurePowerShellVersion: '1.2.0'
 
           # - task: AzureCLI@2
           #   inputs:
