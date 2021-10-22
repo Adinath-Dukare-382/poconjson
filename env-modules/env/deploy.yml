@@ -4,36 +4,34 @@ variables:
 - name: env
   value: pocjson
 
-pool: SamplePool
-
 
 stages:
   - stage: azurescript
     jobs:
       - job:
         steps:
-          - task: AzureCLI@2
-            inputs:
-              azureSubscription: 'Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)'
-              scriptType: 'ps'
-              scriptLocation: 'inlineScript'
-              inlineScript: |
-                az group list --query "[?tags.env=='business']" | ConvertFrom-Json | add-content "C:\Users\A888382\Documents\Testing1\test.txt"
+          # - task: AzureCLI@2
+          #   inputs:
+          #     azureSubscription: 'Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)'
+          #     scriptType: 'ps'
+          #     scriptLocation: 'inlineScript'
+          #     inlineScript: |
+          #       az group list --query "[?tags.env=='business']" | ConvertFrom-Json | add-content "C:\Users\A888382\Documents\Testing1\test.txt"
                              
-          - task: AzureCLI@2
-            inputs:
-              azureSubscription: 'Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)'
-              scriptType: 'ps'
-              scriptLocation: 'inlineScript'
-              inlineScript: |
-                az group list --query "[?tags.env=='business']" | ConvertFrom-Json | add-content "C:\Users\A888382\Documents\Testing1\test.txt"
+          # - task: AzureCLI@2
+          #   inputs:
+          #     azureSubscription: 'Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)'
+          #     scriptType: 'ps'
+          #     scriptLocation: 'inlineScript'
+          #     inlineScript: |
+          #       az group list --query "[?tags.env=='business']" | ConvertFrom-Json | add-content "C:\Users\A888382\Documents\Testing1\test.txt"
           
           - task: AzurePowerShell@5
             inputs:
               azureSubscription: 'svc-poc2'
               azurePowerShellVersion: 'LatestVersion'
               ScriptType: 'InlineScript'
-              Inline: az group list --query "[?tags.env=='business']" | ConvertFrom-Json
+              Inline: az group list --query "[?tags.env=='business']" --output table
                    
           - task: AzureCLI@2
             inputs:
