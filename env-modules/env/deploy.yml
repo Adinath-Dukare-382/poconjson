@@ -3,6 +3,8 @@ trigger: none
 variables:
 - name: env
   value: pocjson
+- name: res
+  value: ""
 
 pool: SamplePool
 
@@ -35,18 +37,19 @@ stages:
               scriptType: 'ps'
               scriptLocation: 'inlineScript'
               inlineScript: |
-                $result1 = $(az appservice plan list --query "[?tags.env=='prod' && tags.owner=='adinath']" | ConvertFrom-Json)
-                $rgname = $result1.resourceGroup
+                res = $(az appservice plan list --query "[?tags.env=='prod' && tags.owner=='adinath']" | ConvertFrom-Json)
+                $rgname = res.resourceGroup
                 write-output $rgname
-          - task: AzureCLI@2
-            inputs:
-              azureSubscription: 'Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)'
-              scriptType: 'ps'
-              scriptLocation: 'inlineScript'
-              inlineScript: |
-                $result2 = $(az group list --query "[?tags.env=='business']" | ConvertFrom-Json)
-                $rgname1 = $result2.name
-                write-output $rgname1
+
+          # - task: AzureCLI@2
+          #   inputs:
+          #     azureSubscription: 'Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)'
+          #     scriptType: 'ps'
+          #     scriptLocation: 'inlineScript'
+          #     inlineScript: |
+          #       $result2 = $(az group list --query "[?tags.env=='business']" | ConvertFrom-Json)
+          #       $rgname1 = $result2.name
+          #       write-output $rgname1
 
   # - template: ../templates/terraform-deploy.yml
   #   parameters:
