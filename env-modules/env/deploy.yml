@@ -52,6 +52,17 @@ stages:
               environmentServiceName: "Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)"
               commandOptions: '-out=tfplan'
               allowTelemetryCollection: true
+            
+          - task: TerraformCLI@0
+            displayName: "terraform apply"
+            enabled: true
+            inputs:
+              command: 'apply'
+              workingDirectory: "$(Build.SourcesDirectory)/POCJson/env"
+              environmentServiceName: "Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)"
+              commandOptions: 'tfplan'
+              allowTelemetryCollection: true
+            condition: and(succeeded(), eq(variables['TerraformApply'], 'True'))
               
           # - task: AzureCLI@2
           #   inputs:
