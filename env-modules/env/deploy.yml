@@ -39,7 +39,7 @@ stages:
               scriptType: 'ps'
               scriptLocation: 'inlineScript'
               inlineScript: | 
-                $appservicePlan = $(az appservice plan list --query "[?tags.env=='prod' && tags.owner=='adinath']" | ConvertFrom-Json)
+                $appservicePlan = $(az appservice plan list --query "[?tags.env==$env && tags.owner=='adinath']" | ConvertFrom-Json)
                 write-output $appservicePlan
                 $fileName = "C:\Users\A888382\Documents\Testing1\terraform.tfvars.json"
 
@@ -53,7 +53,7 @@ stages:
 
                 $data.location = $appservicePlan.location
 
-                $data.env = $env
+                $data.env = $(env)
 
                 $data.apps.app.app_name = "appservice"
 
@@ -67,7 +67,7 @@ stages:
                 $fileName1 = "C:\Users\A888382\Documents\Testing1\terraform1.tfvars.json"
                 $data1 = Get-Content -path $fileName1 -Raw | ConvertFrom-Json 
 
-                $resourcegroup = $(az group list --query "[?tags.env=='business']" | ConvertFrom-Json)
+                $resourcegroup = $(az group list --query "[?tags.env== $env1]" | ConvertFrom-Json)
                 $data1.resource_group_name = $resourcegroup.name
                 $rgname1 = $resourcegroup.name
 
