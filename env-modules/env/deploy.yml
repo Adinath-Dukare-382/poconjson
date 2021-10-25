@@ -39,14 +39,36 @@ stages:
               scriptType: 'ps'
               scriptLocation: 'inlineScript'
               inlineScript: | 
-                $result3 = $(az group list --query "[?tags.env=='business']" | ConvertFrom-Json)
-                $rgname1 = $result3.name 
-                write-output $rgname1
-                $result4 = $(az appservice plan list --query "[?resourceGroup=='$rgname1']" | ConvertFrom-Json)
-                $planname = $result4.name
-                write-output $planname
-                az appservice plan show --name $planname --resource-group $rgname1 --query '{rname:resourceGroup, pname:name}' -o json | add-content "C:\Users\A888382\Documents\Testing1\terraform.tfvars.json"
+                # $result3 = $(az group list --query "[?tags.env=='business']" | ConvertFrom-Json)
+                # $rgname1 = $result3.name 
+                # write-output $rgname1
+                # $result4 = $(az appservice plan list --query "[?resourceGroup=='$rgname1']" | ConvertFrom-Json)
+                # $planname = $result4.name
+                # write-output $planname
+                # az appservice plan show --name $planname --resource-group $rgname1 --query '{rname:resourceGroup, pname:name}' -o json | add-content "C:\Users\A888382\Documents\Testing1\terraform.tfvars.json"
               
+                $appservicePlan = az appservice plan list --query "[?tags.env=='business']" | ConvertFrom-Json
+
+                # $fileName = "terraform.tfvars.json"
+                $fileName = "C:\Users\A888382\Documents\Testing1\terraform.tfvars.json"
+
+                $data = Get-Content -path $fileName -Raw | ConvertFrom-Json 
+
+              
+
+                $data.plan_name = $appservicePlan.name
+
+                $data.resource_group_name = $appservicePlan.resourceGroup 
+
+                $data.location = $appservicePlan.Location
+
+                $data.env = "business"
+
+                $data.apps.app.app_name = "appservice"
+
+              
+
+                $data | ConvertTo-Json | set-content -Path $fileName
           
 
   # - template: ../templates/terraform-deploy.yml
