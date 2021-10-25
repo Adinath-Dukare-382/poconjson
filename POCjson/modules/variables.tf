@@ -8,7 +8,7 @@ variable "location" {
   type = string
 }
 variable "tags" {
-  type = map()
+  type = map(string)
 }
 variable "apps" {
   type = map(object({
