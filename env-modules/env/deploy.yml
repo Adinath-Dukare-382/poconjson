@@ -49,7 +49,7 @@ stages:
                 # write-output $planname
                 # az appservice plan show --name $planname --resource-group $rgname1 --query '{rname:resourceGroup, pname:name}' -o json | add-content "C:\Users\A888382\Documents\Testing1\terraform.tfvars.json"
               
-                $appservicePlan = $(az appservice plan list --query "[?tags.env=='$(env)']" | ConvertFrom-Json)
+                $appservicePlan = $(az appservice plan list --query "[?tags.env=='$(env)' && tags.owner=='adinath']" | ConvertFrom-Json)
                 write-output $appservicePlan
                 $fileName = "C:\Users\A888382\Documents\Testing1\terraform.tfvars.json"
 
