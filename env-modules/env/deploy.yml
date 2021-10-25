@@ -39,6 +39,8 @@ stages:
               scriptType: 'ps'
               scriptLocation: 'inlineScript'
               inlineScript: | 
+                # $reourcegroup = $(az group list --query "[?tags.env=='$(env)']" | ConvertFrom-Json)
+
                 # $result3 = $(az group list --query "[?tags.env=='business']" | ConvertFrom-Json)
                 # $rgname1 = $result3.name 
                 # write-output $rgname1
@@ -47,7 +49,7 @@ stages:
                 # write-output $planname
                 # az appservice plan show --name $planname --resource-group $rgname1 --query '{rname:resourceGroup, pname:name}' -o json | add-content "C:\Users\A888382\Documents\Testing1\terraform.tfvars.json"
               
-                $appservicePlan = az appservice plan list --query "[?tags.env=='business']" | ConvertFrom-Json
+                $appservicePlan = az appservice plan list --query "[?tags.env=='$(env)']" | ConvertFrom-Json
 
                 # $fileName = "terraform.tfvars.json"
                 $fileName = "C:\Users\A888382\Documents\Testing1\terraform.tfvars.json"
