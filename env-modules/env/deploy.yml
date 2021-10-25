@@ -67,7 +67,7 @@ stages:
                 $fileName1 = "C:\Users\A888382\Documents\Testing1\terraform1.tfvars.json"
                 $data1 = Get-Content -path $fileName1 -Raw | ConvertFrom-Json 
 
-                $resourcegroup = $(az group list --query "[?tags.env== $env1]" | ConvertFrom-Json)
+                $resourcegroup = $(az group list --query "[?tags.env== 'business']" | ConvertFrom-Json)
                 $data1.resource_group_name = $resourcegroup.name
                 $rgname1 = $resourcegroup.name
 
@@ -75,6 +75,7 @@ stages:
 
                 $appserviceplan = $(az appservice plan list --query "[?resourceGroup=='$resourcegroup']" | ConvertFrom-Json)
                 $data1.plan_name = $appserviceplan.name
+                $data1.env = 'business'
                 $planname = $appserviceplan.name
                 
                 write-output $planname
