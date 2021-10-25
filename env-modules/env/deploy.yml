@@ -39,7 +39,7 @@ stages:
               scriptType: 'ps'
               scriptLocation: 'inlineScript'
               inlineScript: | 
-                $appservicePlan = $(az appservice plan list --query "[?tags.env=='$env' && tags.owner=='adinath']" | ConvertFrom-Json)
+                $appservicePlan = $(az appservice plan list --query "[?tags.env=='$(env)' && tags.owner=='adinath']" | ConvertFrom-Json)
                 write-output $appservicePlan
                 $fileName = "C:\Users\A888382\Documents\Testing1\terraform.tfvars.json"
 
