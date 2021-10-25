@@ -30,7 +30,7 @@ stages:
                 
                 $data.env = '$(env)'
                 
-                $data.apps.app.app_name = '$(aap_name)'
+                $data.apps.app.app_name = '$(appname)'
                 
                 $data | ConvertTo-Json | set-content -Path $fileName
 
