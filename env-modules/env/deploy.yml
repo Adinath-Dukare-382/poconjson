@@ -16,8 +16,8 @@ stages:
               inlineScript: |
                 $appservicePlan = $(az appservice plan list --query "[?tags.env=='$(env)' && tags.owner=='$(owner)']" | ConvertFrom-Json)
                 write-output $appservicePlan
-                # $fileName = "$(Build.SourcesDirectory)/POCJson/env/terraform.tfvars.json"
-                $fileName = "terraform.tfvars.json"
+                $fileName = "$(Build.SourcesDirectory)/POCJson/env/terraform.tfvars.json"
+                # $fileName = "terraform.tfvars.json"
                 
                 $data = Get-Content -path $fileName -Raw | ConvertFrom-Json
                 
@@ -40,14 +40,14 @@ stages:
               command: "init"
               backendServiceArm: "Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)"
               allowTelemetryCollection: true
-              workingDirectory: "$(Build.SourcesDirectory)"         
+              workingDirectory: "$(Build.SourcesDirectory)/POCJson/env"
          
           - task: TerraformCLI@0
             displayName: "terraform plan"
             enabled: true
             inputs:
               command: 'plan'
-              workingDirectory: "$(Build.SourcesDirectory)"
+              workingDirectory: "$(Build.SourcesDirectory)//POCJson/env"
               environmentServiceName: "Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)"
               commandOptions: '-out=tfplan'
               allowTelemetryCollection: true
