@@ -22,6 +22,7 @@ stages:
                 $data = Get-Content -path $fileName -Raw | ConvertFrom-Json
                 
                 $data.plan_id = $appservicePlan.id
+                $data.plan_name = $appservicePlan.name
                 
                 $data.resource_group_name = $appservicePlan.resourceGroup
                 
