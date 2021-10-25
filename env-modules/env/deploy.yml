@@ -47,7 +47,7 @@ stages:
             enabled: true
             inputs:
               command: 'plan'
-              workingDirectory: "$(Build.SourcesDirectory)//POCJson/env"
+              workingDirectory: "$(Build.SourcesDirectory)/POCJson/env"
               environmentServiceName: "Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)"
               commandOptions: '-out=tfplan'
               allowTelemetryCollection: true
