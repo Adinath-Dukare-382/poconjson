@@ -44,13 +44,15 @@ stages:
                 $fileName = "C:\Users\A888382\Documents\Testing1\terraform.tfvars.json"
 
                 $data = Get-Content -path $fileName -Raw | ConvertFrom-Json 
-                $data.plan_name = $appservicePlan.name
+                $result11 = $appservicePlan.name
+                $data.plan_name = $result11
 
-                $data.resource_group_name = $appservicePlan.resourceGroup 
+                $reult22 = $appservicePlan.resourceGroup
+                $data.resource_group_name = $result22
 
                 $data.location = $appservicePlan.location
 
-                $data.env = "$(env)"
+                $data.env = "adinath"
 
                 $data.apps.app.app_name = "appservice"
 
