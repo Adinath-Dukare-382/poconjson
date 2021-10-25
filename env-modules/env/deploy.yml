@@ -66,12 +66,14 @@ stages:
 
                 $reourcegroup = $(az group list --query "[?tags.env=='$(env1)']" | ConvertFrom-Json)
                 $data1.resource_group_name = $resourcegroup.name
+                $rgname1 = $resourcegroup.name
 
                 write-output $rgname1
 
                 $appserviceplan = $(az appservice plan list --query "[?resourceGroup=='$resourcegroup']" | ConvertFrom-Json)
-                $$date1.plan_name = $appserviceplan.name
-
+                $data1.plan_name = $appserviceplan.name
+                $planname = $appserviceplan.name
+                
                 write-output $planname
 
                 $data1 | ConvertTo-Json | set-content -Path $fileName1
