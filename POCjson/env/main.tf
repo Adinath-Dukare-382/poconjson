@@ -15,21 +15,31 @@ terraform {
 provider "azurerm" {
   features {}
 }
-resource "azurerm_resource_group" "example" {
-  name     = "poconjson"
-  location = "eastus"
-  tags = {
-  env = "business"
-  }
-}
+# resource "azurerm_resource_group" "example" {
+#   name     = "poconjson"
+#   location = "eastus"
+#   tags = {
+#   env = "business"
+#   }
+# }
 
-resource "azurerm_app_service_plan" "example" {
-  name                = "POC-appserviceplan"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+# resource "azurerm_app_service_plan" "example" {
+#   name                = "POC-appserviceplan"
+#   location            = azurerm_resource_group.example.location
+#   resource_group_name = azurerm_resource_group.example.name
 
-  sku {
-    tier = "Standard"
-    size = "S1"
-  }
+#   sku {
+#     tier = "Standard"
+#     size = "S1"
+#   }
+# }
+
+module "name2" {
+  source = "./modules"
+
+  resource_group_name = var.resource_group_name
+  location = var.location
+  plan_name = var.plan_name
+  tags = var.tags
+  apps = var.apps
 }
