@@ -39,6 +39,7 @@ module "name2" {
 
   resource_group_name = var.resource_group_name
   location = var.location
+  plan_id = var.plan_id
   plan_name = var.plan_name
   tags = var.tags
   apps = var.apps
