@@ -50,7 +50,7 @@ stages:
                 # az appservice plan show --name $planname --resource-group $rgname1 --query '{rname:resourceGroup, pname:name}' -o json | add-content "C:\Users\A888382\Documents\Testing1\terraform.tfvars.json"
               
                 $appservicePlan = $(az appservice plan list --query "[?tags.env=='$(env)']" | ConvertFrom-Json)
-
+                write-output $appservicePlan
                 $fileName = "C:\Users\A888382\Documents\Testing1\terraform.tfvars.json"
 
                 $data = Get-Content -path $fileName -Raw | ConvertFrom-Json 
@@ -58,7 +58,7 @@ stages:
 
                 $data.resource_group_name = $appservicePlan.resourceGroup 
 
-                $data.location = $appservicePlan.Location
+                $data.location = $appservicePlan.location
 
                 $data.env = "$(env)"
 
