@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\POCjson",
-    "\\POCjson\\env"
+    "\\POCjson\\env",
+    "\\POCjson\\modules"
   ],
-  "SelectedNode": "\\POCjson\\env",
+  "SelectedNode": "\\POCjson\\env\\main.tf",
   "PreviewInSolutionExplorer": false
 }

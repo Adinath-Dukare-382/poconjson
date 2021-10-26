@@ -15,24 +15,38 @@ stages:
               scriptLocation: 'inlineScript'
               inlineScript: |
                 $appservicePlan = $(az appservice plan list --query "[?tags.env=='$(env)' && tags.owner=='$(owner)']" | ConvertFrom-Json)
-                write-output $appservicePlan
-                $fileName = "$(Build.SourcesDirectory)/POCJson/env/terraform.tfvars.json"
-                # $fileName = "terraform.tfvars.json"
-                
-                $data = Get-Content -path $fileName -Raw | ConvertFrom-Json
-                
-                $data.plan_id = $appservicePlan.id
-                $data.plan_name = $appservicePlan.name
-                
-                $data.resource_group_name = $appservicePlan.resourceGroup
-                
-                $data.location = $appservicePlan.location
-                
-                $data.env = '$(env)'
-                
-                $data.apps.app.app_name = '$(appname)'
-                
+                $fileName = "terraform.tfvars.json"
+                $data = @()
+                $apps = @()
+                $app = @()
+
+                $app.Add("app_name","$(project)")
+                $app.Add("app_name","$(version)")
+                $apps.Add("app",$app)
+
+                $data.Add("plan_name",$appservicePlan.name)
+                $data.Add("plan_id",$appservicePlan.id)
+                $data.Add("location",$appservicePlan.location)
+                $data.Add("resource_group_name",$appservicePlan.resourceGroup)
+                $data.Add("env","$(env)")
+                $data.Add("apps",$apps)
+                $data.Add("tags",$appservicePlan.tags)
                 $data | ConvertTo-Json | set-content -Path $fileName
+                
+
+
+                # $appservicePlan = $(az appservice plan list --query "[?tags.env=='$(env)' && tags.owner=='$(owner)']" | ConvertFrom-Json)
+                # write-output $appservicePlan
+                # $fileName = "$(Build.SourcesDirectory)/POCJson/env/terraform.tfvars.json"
+                # # $fileName = "terraform.tfvars.json"
+                # $data = Get-Content -path $fileName -Raw | ConvertFrom-Json
+                # $data.plan_id = $appservicePlan.id
+                # $data.plan_name = $appservicePlan.name
+                # $data.resource_group_name = $appservicePlan.resourceGroup
+                # $data.location = $appservicePlan.location
+                # $data.env = '$(env)'
+                # $data.apps.app.app_name = '$(appname)'
+                # $data | ConvertTo-Json | set-content -Path $fileName
 
           - task: TerraformCLI@0
             displayName: "terraform init"
@@ -63,53 +77,7 @@ stages:
               commandOptions: 'tfplan'
               allowTelemetryCollection: true
             condition: and(succeeded(), eq(variables['TerraformApply'], 'True'))
-              
-          # - task: AzureCLI@2
-          #   inputs:
-          #     azureSubscription: 'Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)'
-          #     scriptType: 'ps'
-          #     scriptLocation: 'inlineScript'
-          #     inlineScript: | 
-          #       $appservicePlan = $(az appservice plan list --query "[?tags.env=='$(env)' && tags.owner=='$(owner)']" | ConvertFrom-Json)
-          #       write-output $appservicePlan
-          #       $fileName = "C:\Users\A888382\Documents\Testing1\terraform.tfvars.json"
-
-          #       $data = Get-Content -path $fileName -Raw | ConvertFrom-Json
-
-          #       # $result11 = $appservicePlan.name
-          #       $data.plan_name = $appservicePlan.name
-
-          #       # $result22 = $appservicePlan.resourceGroup
-          #       $data.resource_group_name = $appservicePlan.resourceGroup
-
-          #       $data.location = $appservicePlan.location
-
-          #       $data.env = '$(env)'
-
-          #       $data.apps.app.app_name = "appservice"
-
-          #       $data | ConvertTo-Json | set-content -Path $fileName
-          
-
-          # - task: AzureCLI@2
-          #   inputs:
-          #     azureSubscription: 'Visual Studio Professional Subscription(36e17b0a-f140-42b7-933a-03495cc621b2)'
-          #     scriptType: 'ps'
-          #     scriptLocation: 'inlineScript'
-          #     inlineScript: |
-          #       $fileName1 = "C:\Users\A888382\Documents\Testing1\terraform1.tfvars.json"
-          #       $data1 = Get-Content -path $fileName1 -Raw | ConvertFrom-Json 
-          #       $resourcegroup = $(az group list --query "[?tags.env== '$(env1)']" | ConvertFrom-Json)
-          #       $data1.resource_group_name = $resourcegroup.name
-          #       $rgname1 = $resourcegroup.name
-          #       write-output $rgname1
-          #       $appserviceplan = $(az appservice plan list --query "[?resourceGroup=='$resourcegroup']" | ConvertFrom-Json)
-          #       $data1.plan_name = $appserviceplan.name
-          #       $data1.env = '$(env1)'
-          #       $planname = $appserviceplan.name    
-          #       write-output $planname
-          #       $data1 | ConvertTo-Json | set-content -Path $fileName1
-
+           
 
     
   # - template: ../templates/terraform-deploy.yml
