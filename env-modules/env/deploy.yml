@@ -21,7 +21,7 @@ stages:
                 $app = @()
 
                 $app.Add("app_name","$(project)")
-                $app.Add("app_name","$(version)")
+                $app.Add("version","$(version)")
                 $apps.Add("app",$app)
 
                 $data.Add("plan_name",$appservicePlan.name)
