@@ -16,9 +16,9 @@ stages:
               inlineScript: |
                 $appservicePlan = $(az appservice plan list --query "[?tags.env=='$(env)' && tags.owner=='$(owner)']" | ConvertFrom-Json)
                 $fileName = "terraform.tfvars.json"
-                $data = @()
-                $apps = @()
-                $app = @()
+                $data = @{}
+                $apps = @{}
+                $app = @{}
 
                 $app.add("app_name","$(project)")
                 $app.Add("version","$(version)")
