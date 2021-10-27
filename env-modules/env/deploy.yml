@@ -37,8 +37,8 @@ stages:
 
                 $appservicePlan = $(az appservice plan list --query "[?tags.env=='$(env)' && tags.owner=='$(owner)']" | ConvertFrom-Json)
                 write-output $appservicePlan
-                # $fileName = "$(Build.SourcesDirectory)/POCJson/env/terraform.tfvars.json"
-                $fileName = "terraform.tfvars.json"
+                $fileName = "$(Build.SourcesDirectory)/POCJson/env/terraform.tfvars.json"
+                # $fileName = "terraform.tfvars.json"
                 $data = Get-Content -path $fileName -Raw | ConvertFrom-Json
                 $data.plan_id = $appservicePlan.id
                 $data.plan_name = $appservicePlan.name
