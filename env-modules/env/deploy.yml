@@ -35,8 +35,8 @@ stages:
                 
           - task: DownloadFileshareArtifacts@1
             inputs:
-              filesharePath: 'terraform.tfvars.json'
-              artifactName: 'dropjson'
+              filesharePath: '$(Build.SourcesDirectory)'
+              artifactName: 'terraform.tfvars.json'
               downloadPath: '$(System.ArtifactsDirectory)'
 
 
