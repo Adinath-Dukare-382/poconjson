@@ -35,7 +35,7 @@ stages:
                 
           - task: PublishBuildArtifacts@1
             inputs:
-              PathtoPublish: '$(Build.ArtifactStagingDirectory)\terraform.tfvars.json'
+              PathtoPublish: 'terraform.tfvars.json'
               ArtifactName: 'drop'
               publishLocation: 'Container'
               
