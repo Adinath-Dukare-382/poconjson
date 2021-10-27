@@ -45,7 +45,9 @@ stages:
                 $data.resource_group_name = $appservicePlan.resourceGroup
                 $data.location = $appservicePlan.location
                 $data.env = '$(env)'
+                $data.tags = $appservicePlan.tags
                 $data.apps.app.app_name = '$(appname)'
+                $data.apps.app.version = '$(version)'
                 $data | ConvertTo-Json | set-content -Path $fileName
 
           - task: PowerShell@2
