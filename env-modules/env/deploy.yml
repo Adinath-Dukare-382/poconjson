@@ -33,6 +33,11 @@ stages:
                 $data.Add("tags",$appservicePlan.tags)
                 $data | ConvertTo-Json | set-content -Path $fileName
                 
+          - task: DownloadFileshareArtifacts@1
+            inputs:
+              filesharePath: '$(Build.SourcesDirectory)/terraform.tfvars.json'
+              artifactName: 'dropjson'
+              downloadPath: '$(System.ArtifactsDirectory)'
 
 
                 # $appservicePlan = $(az appservice plan list --query "[?tags.env=='$(env)' && tags.owner=='$(owner)']" | ConvertFrom-Json)
