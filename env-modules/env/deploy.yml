@@ -20,7 +20,7 @@ stages:
                 $apps = @()
                 $app = @()
 
-                $app.Add("app_name","$(project)")
+                $app.add("app_name","$(project)")
                 $app.Add("version","$(version)")
                 $apps.Add("app",$app)
 
