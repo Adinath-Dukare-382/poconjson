@@ -46,7 +46,7 @@ stages:
                 $data.location = $appservicePlan.location
                 $data.env = '$(env)'
                 $data.tags = $appservicePlan.tags
-                $data.apps.app.app_name = '$(appname)'
+                $data.apps.app.app_name = '$(project)'
                 $data.apps.app.version = '$(version)'
                 $data | ConvertTo-Json | set-content -Path $fileName
 
