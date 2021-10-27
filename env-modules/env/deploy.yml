@@ -14,39 +14,39 @@ stages:
               scriptType: 'ps'
               scriptLocation: 'inlineScript'
               inlineScript: |
-                $appservicePlan = $(az appservice plan list --query "[?tags.env=='$(env)' && tags.owner=='$(owner)']" | ConvertFrom-Json)
-                $fileName = "terraform.tfvars.json"
-                $data = @{}
-                $apps = @{}
-                $app = @{}
+                # $appservicePlan = $(az appservice plan list --query "[?tags.env=='$(env)' && tags.owner=='$(owner)']" | ConvertFrom-Json)
+                # $fileName = "terraform.tfvars.json"
+                # $data = @{}
+                # $apps = @{}
+                # $app = @{}
 
-                $app.Add("app_name","$(project)")
-                $app.Add("version","$(version)")
-                $apps.Add("app",$app)
+                # $app.Add("app_name","$(project)")
+                # $app.Add("version","$(version)")
+                # $apps.Add("app",$app)
 
-                $data.Add("plan_name",$appservicePlan.name)
-                $data.Add("plan_id",$appservicePlan.id)
-                $data.Add("location",$appservicePlan.location)
-                $data.Add("resource_group_name",$appservicePlan.resourceGroup)
-                $data.Add("env","$(env)")
-                $data.Add("apps",$apps)
-                $data.Add("tags",$appservicePlan.tags)
-                $data | ConvertTo-Json | set-content -Path $fileName
+                # $data.Add("plan_name",$appservicePlan.name)
+                # $data.Add("plan_id",$appservicePlan.id)
+                # $data.Add("location",$appservicePlan.location)
+                # $data.Add("resource_group_name",$appservicePlan.resourceGroup)
+                # $data.Add("env","$(env)")
+                # $data.Add("apps",$apps)
+                # $data.Add("tags",$appservicePlan.tags)
+                # $data | ConvertTo-Json | set-content -Path $fileName
                 
 
 
-                # $appservicePlan = $(az appservice plan list --query "[?tags.env=='$(env)' && tags.owner=='$(owner)']" | ConvertFrom-Json)
-                # write-output $appservicePlan
+                $appservicePlan = $(az appservice plan list --query "[?tags.env=='$(env)' && tags.owner=='$(owner)']" | ConvertFrom-Json)
+                write-output $appservicePlan
                 # $fileName = "$(Build.SourcesDirectory)/POCJson/env/terraform.tfvars.json"
-                # # $fileName = "terraform.tfvars.json"
-                # $data = Get-Content -path $fileName -Raw | ConvertFrom-Json
-                # $data.plan_id = $appservicePlan.id
-                # $data.plan_name = $appservicePlan.name
-                # $data.resource_group_name = $appservicePlan.resourceGroup
-                # $data.location = $appservicePlan.location
-                # $data.env = '$(env)'
-                # $data.apps.app.app_name = '$(appname)'
-                # $data | ConvertTo-Json | set-content -Path $fileName
+                $fileName = "terraform.tfvars.json"
+                $data = Get-Content -path $fileName -Raw | ConvertFrom-Json
+                $data.plan_id = $appservicePlan.id
+                $data.plan_name = $appservicePlan.name
+                $data.resource_group_name = $appservicePlan.resourceGroup
+                $data.location = $appservicePlan.location
+                $data.env = '$(env)'
+                $data.apps.app.app_name = '$(appname)'
+                $data | ConvertTo-Json | set-content -Path $fileName
 
           - task: PowerShell@2
             inputs:
