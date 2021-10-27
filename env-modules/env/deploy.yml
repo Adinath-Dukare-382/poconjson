@@ -22,7 +22,7 @@ stages:
 
                 $app.add("app_name","$(project)")
                 $app.Add("version","$(version)")
-                $apps.Add("app",$app)
+                $apps.Add("apps",$app)
 
                 $data.Add("plan_name",$appservicePlan.name)
                 $data.Add("plan_id",$appservicePlan.id)
