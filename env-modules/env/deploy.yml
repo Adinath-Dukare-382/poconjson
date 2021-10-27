@@ -33,6 +33,11 @@ stages:
                 $data.Add("tags",$appservicePlan.tags)
                 $data | ConvertTo-Json | set-content -Path $fileName
                 
+          - task: PublishBuildArtifacts@1
+            inputs:
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)\terraform.tfvars.json'
+              ArtifactName: 'drop'
+              publishLocation: 'Container'
           - task: DownloadFileshareArtifacts@1
             inputs:
               filesharePath: '$(Build.SourcesDirectory)'
