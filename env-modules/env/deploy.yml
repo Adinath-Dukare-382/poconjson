@@ -20,9 +20,9 @@ stages:
                 $apps = @{}
                 $app = @{}
 
-                $app.add("app_name","$(project)")
+                $app.Add("app_name","$(project)")
                 $app.Add("version","$(version)")
-                $apps.Add("apps",$app)
+                $apps.Add("app",$app)
 
                 $data.Add("plan_name",$appservicePlan.name)
                 $data.Add("plan_id",$appservicePlan.id)
@@ -47,6 +47,11 @@ stages:
                 # $data.env = '$(env)'
                 # $data.apps.app.app_name = '$(appname)'
                 # $data | ConvertTo-Json | set-content -Path $fileName
+
+          - task: PowerShell@2
+            inputs:
+              targetType: 'inline'
+              script: 'get-content $(Build.SourcesDirectory)\terraform.tfvars.json'
 
           - task: TerraformCLI@0
             displayName: "terraform init"
