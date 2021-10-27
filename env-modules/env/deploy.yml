@@ -38,11 +38,12 @@ stages:
               PathtoPublish: '$(Build.ArtifactStagingDirectory)\terraform.tfvars.json'
               ArtifactName: 'drop'
               publishLocation: 'Container'
-          - task: DownloadFileshareArtifacts@1
-            inputs:
-              filesharePath: '$(Build.SourcesDirectory)'
-              artifactName: 'terraform.tfvars.json'
-              downloadPath: '$(System.ArtifactsDirectory)'
+              
+          # - task: DownloadFileshareArtifacts@1
+          #   inputs:
+          #     filesharePath: '$(Build.SourcesDirectory)'
+          #     artifactName: 'terraform.tfvars.json'
+          #     downloadPath: '$(System.ArtifactsDirectory)'
 
 
                 # $appservicePlan = $(az appservice plan list --query "[?tags.env=='$(env)' && tags.owner=='$(owner)']" | ConvertFrom-Json)
